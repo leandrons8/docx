@@ -2,7 +2,6 @@
 
 import {
   ExternalHyperlink,
-  ImageRun,
   Paragraph,
   patchDocument,
   PatchType,
@@ -67,17 +66,12 @@ export async function patch(){
       },
     },
   }).then((doc) => {
-    // Create a Blob from the buffer
     const blob = new Blob([doc], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
-
-    // Create a link element to download the patched file
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
     a.download = 'patched.docx';
-    document.body.appendChild(a);
     a.click();
-    document.body.removeChild(a);
     window.URL.revokeObjectURL(url);
   });
 }
