@@ -10,7 +10,7 @@ export default (phase: string) => {
     /* config options here */
     output: 'export',
     basePath: process.env.PAGES_BASE_PATH,
-    assetPrefix: isDev ? undefined : `https://leandrons8.github.io/${process.env.PAGES_BASE_PATH}`,
+    assetPrefix: isDev ? undefined : `https://leandrons8.github.io${process.env.PAGES_BASE_PATH}`,
     experimental: {
       optimizePackageImports: ['react-bootstrap']
     }
