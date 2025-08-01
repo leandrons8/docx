@@ -10,6 +10,8 @@ import {
 } from "docx";
 import { saveAs } from "file-saver"
 
+const prefix = process.env.BASE_PATH || "";
+
 export async function patch(){
   // let prefix
   // if (process.env.PAGES_BASE_PATH){
@@ -19,7 +21,7 @@ export async function patch(){
   // }
   patchDocument({
     outputType: "blob",
-    data: await (await fetch("/model.docx")).blob(),
+    data: await (await fetch(`${prefix}/model.docx`)).blob(),
     patches: {
       campo1: {
         type: PatchType.PARAGRAPH,
