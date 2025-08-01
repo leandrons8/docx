@@ -8,6 +8,7 @@ import {
   TextRun,
   Packer
 } from "docx";
+import { saveAs } from "file-saver"
 
 export async function patch(){
   let prefix
@@ -16,11 +17,9 @@ export async function patch(){
   } else {
     prefix = ""
   }
-  const response = await fetch(`${prefix}/model.docx`);
-  const arrayBuffer = await response.arrayBuffer();
   patchDocument({
-    outputType: "nodebuffer",
-    data: arrayBuffer,
+    outputType: "blob",
+    data: await (await fetch(`${prefix}/model.docx`)).blob(),
     patches: {
       campo1: {
         type: PatchType.PARAGRAPH,
@@ -65,13 +64,5 @@ export async function patch(){
         ],
       },
     },
-  }).then((doc) => {
-    const blob = new Blob([doc], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'patched.docx';
-    a.click();
-    window.URL.revokeObjectURL(url);
-  });
+  }).then((doc) => saveAs(doc, "example.docx"));
 }
