@@ -18,6 +18,7 @@ export default function Home() {
       <Row>
         <Col>
           <Button onClick={patch} />
+          <a href="/model.docx">Download</a>
         </Col>
       </Row>
     </Container>
