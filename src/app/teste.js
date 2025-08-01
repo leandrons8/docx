@@ -11,7 +11,13 @@ import {
 } from "docx";
 
 export async function patch(){
-  const response = await fetch('/model.docx');
+  let prefix
+  if (process.env.PAGES_BASE_PATH){
+    prefix = process.env.PAGES_BASE_PATH
+  } else {
+    prefix = ""
+  }
+  const response = await fetch(`${prefix}/model.docx`);
   const arrayBuffer = await response.arrayBuffer();
   patchDocument({
     outputType: "nodebuffer",
