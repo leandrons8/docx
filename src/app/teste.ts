@@ -11,15 +11,15 @@ import {
 import { saveAs } from "file-saver"
 
 export async function patch(){
-  let prefix
-  if (process.env.PAGES_BASE_PATH){
-    prefix = process.env.PAGES_BASE_PATH
-  } else {
-    prefix = ""
-  }
+  // let prefix
+  // if (process.env.PAGES_BASE_PATH){
+  //   prefix = process.env.PAGES_BASE_PATH
+  // } else {
+  //   prefix = ""
+  // }
   patchDocument({
     outputType: "blob",
-    data: await (await fetch(`${prefix}/model.docx`)).blob(),
+    data: await (await fetch("/model.docx")).blob(),
     patches: {
       campo1: {
         type: PatchType.PARAGRAPH,
