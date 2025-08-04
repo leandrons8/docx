@@ -39,5 +39,5 @@ export async function patch(dados: tipoDados){
         children: [new Paragraph(dados.descricao)],
       },
     },
-  }).then((doc) => saveAs(doc, "example.docx"));
+  }).then((doc) => saveAs(doc, "relatorio.docx"));
 }
