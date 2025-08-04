@@ -10,7 +10,10 @@ import {
 } from "docx";
 import { saveAs } from "file-saver"
 
-const prefix = process.env.BASE_PATH || "";
+const base = process.env.BASE_PATH || "";
+const pages = process.env.PAGES_BASE_PATH || ""
+
+const tests_url = "https://raw.githubusercontent.com/leandrons8/docx/gh-pages/public/model.docx"
 
 export async function patch(){
   // let prefix
@@ -21,7 +24,7 @@ export async function patch(){
   // }
   patchDocument({
     outputType: "blob",
-    data: await (await fetch(`${prefix}/model.docx`)).blob(),
+    data: await (await fetch("model.docx")).blob(),
     patches: {
       campo1: {
         type: PatchType.PARAGRAPH,
