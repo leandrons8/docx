@@ -10,52 +10,33 @@ import {
 } from "docx";
 import { saveAs } from "file-saver"
 
-export async function patch(){
+type tipoDados = {
+  projeto: string,
+  cliente: string,
+  sufixo: string,
+  descricao: string
+}
+
+export async function patch(dados: tipoDados){
   patchDocument({
     outputType: "blob",
     data: await (await fetch("model.docx")).blob(),
     patches: {
       campo1: {
         type: PatchType.PARAGRAPH,
-        children: [new TextRun("Sir. "), new TextRun("John Doe"), new TextRun("(The Conqueror)")],
+        children: [new TextRun(dados.projeto)],
       },
       campo2: {
         type: PatchType.PARAGRAPH,
-        children: [new TextRun("Heading wow!")],
+        children: [new TextRun(dados.cliente)],
       },
       campo3: {
         type: PatchType.PARAGRAPH,
-        children: [
-          new TextRun("#657"),
-          new ExternalHyperlink({
-            children: [
-              new TextRun({
-                text: "BBC News Link",
-              }),
-            ],
-            link: "https://www.bbc.co.uk/news",
-          }),
-        ],
+        children: [new TextRun(` - ${dados.sufixo}`)],
       },
       campo4: {
         type: PatchType.DOCUMENT,
-        children: [
-          new Paragraph("Lorem ipsum paragraph"),
-          new Paragraph("Another paragraph"),
-          new Paragraph({
-            children: [
-              new TextRun("This is a "),
-              new ExternalHyperlink({
-                children: [
-                  new TextRun({
-                    text: "Google Link",
-                  }),
-                ],
-                link: "https://www.google.co.uk",
-              }),
-            ],
-          }),
-        ],
+        children: [new Paragraph(dados.descricao)],
       },
     },
   }).then((doc) => saveAs(doc, "example.docx"));
