@@ -35,8 +35,8 @@ export async function patch(dados: tipoDados){
         children: [new TextRun(` - ${dados.sufixo}`)],
       },
       campo4: {
-        type: PatchType.DOCUMENT,
-        children: [new Paragraph(dados.descricao)],
+        type: PatchType.PARAGRAPH,
+        children: [new TextRun(dados.descricao)],
       },
     },
   }).then((doc) => saveAs(doc, "relatorio.docx"));
