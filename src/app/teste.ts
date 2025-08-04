@@ -10,18 +10,7 @@ import {
 } from "docx";
 import { saveAs } from "file-saver"
 
-const base = process.env.BASE_PATH || "";
-const pages = process.env.PAGES_BASE_PATH || ""
-
-const tests_url = "https://raw.githubusercontent.com/leandrons8/docx/gh-pages/public/model.docx"
-
 export async function patch(){
-  // let prefix
-  // if (process.env.PAGES_BASE_PATH){
-  //   prefix = process.env.PAGES_BASE_PATH
-  // } else {
-  //   prefix = ""
-  // }
   patchDocument({
     outputType: "blob",
     data: await (await fetch("model.docx")).blob(),
