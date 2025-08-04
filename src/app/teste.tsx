@@ -1,12 +1,9 @@
 'use client'
 
 import {
-  ExternalHyperlink,
-  Paragraph,
   patchDocument,
   PatchType,
   TextRun,
-  Packer
 } from "docx";
 import { saveAs } from "file-saver"
 
